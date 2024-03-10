@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Validate Form Using JavaScript</title>
+ <style>
+    .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    }
+    .label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    }
+    .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    margin-bottom: 10px;
+    }
+    .error {
+        color: red;
+        font-size: 12px;
+        margin-bottom: 5px;
+        }
+        .button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+        </style>
+       </head>
+       <body>
+        <div class="container">
+        <h1>Validate Form Using JavaScript</h1>
+        <form onsubmit="return validateForm()">
+        <div class="label">First Name:</div>
+        <input type="text" id="firstName" class="input" required>
+        <div class="error" id="firstNameError"></div>
+        <div class="label">Last Name:</div>
+        <input type="text" id="lastName" class="input" required>
+        <div class="error" id="lastNameError"></div>
+        <div class="label">Email Address:</div>
+        <input type="text" id="email" class="input" required>
+        <div class="error" id="emailError"></div>
+        <div class="label">Mobile Number:</div>
+        <input type="tel" id="mobileNumber" class="input" required>
+        <div class="error" id="mobileNumberError"></div>
+        <div class="label">Password:</div>
+        <input type="password" id="password" class="input" required>
+        <div class="error" id="passwordError"></div>
+        <div class="label">Confirm Password:</div>
+        <input type="password" id="confirmPassword" class="input" required>
+        <div class="error" id="confirmPasswordError"></div>
+        <button type="submit" class="button">Submit</button>
+    </form>
+</div>
+<script>
+function validateForm() {
+// Get the form elements
+var firstName = document.getElementById("firstName");
+var lastName = document.getElementById("lastName");
+var email = document.getElementById("email");
+var mobileNumber = document.getElementById("mobileNumber");
+var password = document.getElementById("password");
+var confirmPassword = document.getElementById("confirmPassword");
+// Clear all error messages
+var errorMessages = document.getElementsByClassName("error");
+for (var i = 0; i < errorMessages.length; i++) {
+errorMessages[i].innerHTML = "";
+}
+// Validate first name
+if (/\d/.test(firstName.value)) {
+document.getElementById("firstNameError").innerHTML = "First name cannot containnumbers.";
+}
+// Validate last name
+if (/\d/.test(lastName.value)) {document.getElementById("lastNameError").innerHTML = "Last name cannot containnumbers.";
+}
+// Validate email
+if (!email.value.includes("@")) {
+document.getElementById("emailError").innerHTML = "Email address must contain @symbol.";
+}
+// Validate mobile number
+if (!/^\d{10}$/.test(mobileNumber.value)) {
+document.getElementById("mobileNumberError").innerHTML = "Mobile number musthave 10 digits.";
+}
+// Validate password
+if (!/[a-z]/.test(password.value) || !/[A-Z]/.test(password.value) || !/\d/.test(password.value)) {
+    document.getElementById("passwordError").innerHTML = "Password must contain at leastone uppercase letter, one lowercase letter, and one number.";
+ }
+ // Validate confirm password
+ if (confirmPassword.value !== password.value) {
+ document.getElementById("confirmPasswordError").innerHTML = "Passwords do notmatch.";
+ }
+ // Prevent form submission if there are errors
+ if (document.querySelectorAll('.error').length > 0) {
+ return false;
+ }
+ return true;
+ }
+ </script>
+</body>
+</html>
